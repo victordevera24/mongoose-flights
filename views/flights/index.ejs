@@ -1,22 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flights</title>
-</head>
-<body>
-    <form action="/flights" >
-        <input type="submit" value="All Flights">
-    </form>
-    <form action="flights/new" >
-        <input type="submit" value="Create New Flight">
-    </form>
+<%- include('../partials/header') %>
+
     <h1>Hello Flights</h1>
     <table>
         <thead>
           <tr>
+            <th></th>
             <th>Airlines</th>
             <th>Airport</th>
             <th>Flight Number</th>
@@ -26,6 +14,7 @@
         <tbody>
             <% flights.forEach(function(f) { %>
             <tr>
+              <td><a href="/flights/<%=f._id%>">Details</a></td>
               <td><%= f.airline %></td>
               <td><%= f.airport %></td>
               <td><%= f.flightNo %></td>
@@ -34,5 +23,5 @@
             <% }); %>
         </tbody>
       </table>
-</body>
-</html>
+      
+<%- include('../partials/footer') %>

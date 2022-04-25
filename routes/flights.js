@@ -9,4 +9,6 @@ router.post('/', flightCtrl.create)
 
 router.get('/', flightCtrl.index)
 
+router.get('/:id', flightCtrl.show)
+
 module.exports = router;

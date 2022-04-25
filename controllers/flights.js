@@ -2,7 +2,6 @@ const Flight = require('../models/flight.js');
 
 function index(req, res){
     Flight.find({},function(err,flights){
-        console.log("in the show",flights)
         res.render('flights/index', {flights});
     })
 }
@@ -12,19 +11,24 @@ function newFlight(req, res){
 }
 
 function create(req, res){
-    const flight = new Flight(req.body);
-    req.body.flightNo = Number(req.body.flightNo)
-    console.log('in creat', req.body)
-    console.log('this is flight', flight)
+    if (req.body.departs === '') delete req.body.departs;
+    const flight = new Flight(req.body)
+    console.log('in create', flight)
     flight.save(function(err){
         if(err) return res.render('flights/new');
-        res.redirect('/flights');
+        res.redirect('/flights')
     })
 };
 
+function show(req, res){
+    Flight.findById(req.params.id, function(err, flight) {
+        res.render('flights/show', {flight})
+    })
+}
 
 module.exports = {
     index,
     new : newFlight,
-    create
+    create,
+    show
 }
