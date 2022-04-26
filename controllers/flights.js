@@ -1,4 +1,5 @@
 const Flight = require('../models/flight.js');
+const Ticket = require('../models/ticket.js')
 
 function index(req, res){
     Flight.find({},function(err,flights){
@@ -22,7 +23,9 @@ function create(req, res){
 
 function show(req, res){
     Flight.findById(req.params.id, function(err, flight) {
-        res.render('flights/show', {flight})
+        Ticket.find({flight: flight._id}, function(err, tickets) {
+            res.render('flights/show', {flight, tickets})
+        })
     })
 }
 
